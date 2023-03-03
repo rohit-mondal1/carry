@@ -15,7 +15,7 @@ const CatogoriCart = ({ product }) => {
         </div>
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold my-3">{name}</h1>
-          <button className="btn bg-blue-600 px-4 mt-6">see mor...</button>
+          <button className="btn bg-blue-600 px-4 mt-6">see Products..</button>
         </div>
       </div>
     </div>

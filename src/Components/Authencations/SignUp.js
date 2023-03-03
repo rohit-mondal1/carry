@@ -1,16 +1,28 @@
-import React from 'react';
+import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
   return (
     <div>
       <div className="w-full mx-auto my-6 max-w-md p-8 space-y-3 rounded-xl bg-slate-900 text-gray-100">
-        <h1 className="text-2xl font-bold text-center">Login</h1>
+        <h1 className="text-2xl font-bold text-center">signUp</h1>
         <form className="space-y-6 ng-untouched ng-pristine ng-valid">
           <div className="space-y-1 text-sm">
             <label for="username" className="block text-gray-400">
-              Email
+              User name *
+            </label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+              className="w-full px-4 py-3 rounded-md border-gray-00 bg-gray-100 text-gray-900 focus:border-violet-400"
+            />
+          </div>
+          <div className="space-y-1 text-sm">
+            <label for="username" className="block text-gray-400">
+              Email *
             </label>
             <input
               type="email"
@@ -22,7 +34,7 @@ const Login = () => {
           </div>
           <div className="space-y-1 text-sm">
             <label for="password" className="block text-gray-400">
-              Password
+              Password *
             </label>
             <input
               type="password"
@@ -32,8 +44,17 @@ const Login = () => {
               className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-100 focus:border-violet-400"
             />
           </div>
+          <div className="space-y-1 text-sm">
+            <label for="type" className="block text-gray-400">
+              Please Your Account Type *
+            </label>
+            <select className="select select-bordered w-full text-black">
+              <option>Buyer</option>
+              <option>Seller</option>
+            </select>
+          </div>
           <button className="block w-full p-3 text-center rounded-sm text-gray-900 bg-blue-500">
-            Log in
+            SignUp
           </button>
         </form>
         <div className="flex items-center pt-4 space-x-1">
@@ -45,16 +66,13 @@ const Login = () => {
         </div>
         <div className="flex justify-center space-x-4">
           <button aria-label="Log in with Google" className="p-3 rounded-sm">
-            <FcGoogle className='text-5xl font-bold' />
+            <FcGoogle className="text-5xl font-bold" />
           </button>
         </div>
         <p className="text-xs text-center sm:px-6 text-gray-400">
           Don't have an account?
-          <Link
-            to="/"
-            className="underline text-gray-100"
-          >
-            Sign up
+          <Link to="/" className="underline text-gray-100">
+            Login..
           </Link>
         </p>
       </div>
@@ -62,4 +80,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
