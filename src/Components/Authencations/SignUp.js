@@ -1,32 +1,83 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const {signup} = useContext(AuthContext)
+  const { signup ,loginGoogle} = useContext(AuthContext);
 
   const handleAddProduct = (data) => {
     const name = data.username;
     const email = data.email;
     const password = data.password;
     const type = data.type;
-
-    signup(email , password).then(res =>{
-      const user = res.user;
-      if(user.uid){
-        
+     const items ={
+      name,
+      email,
+      type
+     }
+    signup(email, password)
+      .then((res) => {
+        const user = res.user;
+        if (user.uid) {
+          fetch("http://localhost:8000/user", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(items),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if(data?.acknowledged){
+                navigate('/')
+                return toast.success('success sign up !!')
+              }
+            });
         }
-    }).catch(e =>{
-      console.error(e.message)
-    })
-    
+      })
+      .catch((e) => {
+        console.error(e.message);
+      });
+  };
+
+  const googleHandel = () => {
+    loginGoogle()
+      .then((res) => {
+        const user = res.user
+      
+        const {email , displayName} = user;
+        const items ={
+          name :displayName,
+          email,
+          type :"Buyer"
+         }
+        if (user.uid) {
+          fetch("http://localhost:8000/user", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(items),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if(data?.acknowledged){
+                navigate('/')
+                return toast.success('success sign up !!')
+              }
+            });
+        }
+      })
+      .catch((e) => {});
   };
 
   return (
@@ -117,7 +168,7 @@ const SignUp = () => {
           <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button aria-label="Log in with Google" className="p-3 rounded-sm">
+          <button onClick={googleHandel} aria-label="Log in with Google" className="p-3 rounded-sm">
             <FcGoogle className="text-5xl font-bold" />
           </button>
         </div>
