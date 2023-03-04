@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import {GiHamburgerMenu} from "react-icons/gi"
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AuthContext } from "../Context/UserContext";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
 
-
-
-  // nave items 
+  // nave items
   const manuList = (
     <>
       <li>
@@ -23,12 +23,20 @@ const Header = () => {
       <li>
         <NavLink to="/blog">Blogs</NavLink>
       </li>
-      <li>
-        <NavLink to="/LogIn">LogIn</NavLink>
-      </li>
-      <li>
-        <NavLink to="/Register">Register</NavLink>
-      </li>
+      {user.uid ? (
+        <li>
+          <NavLink to="/">LogI Out</NavLink>
+        </li>
+      ) : (
+        <>
+          <li>
+            <NavLink to="/LogIn">LogIn</NavLink>
+          </li>
+          <li>
+            <NavLink to="/Register">Register</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -40,14 +48,13 @@ const Header = () => {
           <h1>CARRY</h1>
         </Link>
       </div>
-      
 
       {/* responive manu  */}
 
       <div className="navbar-end gap-4">
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <GiHamburgerMenu/>
+            <GiHamburgerMenu />
           </label>
           <ul
             tabIndex={0}
@@ -57,7 +64,7 @@ const Header = () => {
           </ul>
         </div>
       </div>
-    {/* lg  */}
+      {/* lg  */}
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal p-0 text-xl font-semibold text-blue-800">
           {manuList}

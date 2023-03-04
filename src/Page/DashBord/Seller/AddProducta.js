@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { RiImageAddFill } from "react-icons/ri";
 
@@ -17,9 +17,12 @@ const AddProducta = () => {
       return data;
     },
   });
-  console.log(categories);
+  if(isLoading){
+    return;
+  }
+  
   const imageHostKey = "df1509eeb08fa7011ab2697f6fe3f944";
-  // from handelar
+  // from handler
   const handleAddProduct = (data) => {
     const image = data.image[0];
     const formData = new FormData();
@@ -58,16 +61,16 @@ const AddProducta = () => {
 
   return (
     <div>
-      <div className="addProduct w-full">
+      <div className=" w-full">
         <div className=" my-5 flex items-center justify-center">
           <form
             onSubmit={handleSubmit(handleAddProduct)}
-            className="bg-neutral text-white w-11/12 md:w-4/5 p-5 rounded-2xl"
+            className="bg-slate-900 text-white w-11/12 md:w-4/5 p-5 rounded-2xl"
           >
-            <h2 className="text-4xl mb-3 font-bold text-center capitalize text-secondary ">
+            <h2 className="text-4xl text-white mb-3 font-bold text-center capitalize ">
               Add Your product
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-secondary ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
               <div>
                 <label
                   className="capitalize text-xl font-semibold"
@@ -78,7 +81,7 @@ const AddProducta = () => {
                 <input
                   type="text"
                   placeholder="Name"
-                  className="input w-full border-2 border-neutral text-accent"
+                  className="input w-full border-2 border-neutral "
                   id="sellerName"
                   defaultValue="{user?.displayName}"
                   readOnly
@@ -95,7 +98,7 @@ const AddProducta = () => {
                 <input
                   type="text"
                   placeholder="product name"
-                  className="input w-full border-2 border-neutral text-accent"
+                  className="input w-full text-black border-2 border-neutral "
                   id="product-name"
                   {...register("productName", {
                     required: "must enter product name",
@@ -113,7 +116,7 @@ const AddProducta = () => {
                 <input
                   type="email"
                   placeholder="email"
-                  className="input w-full border-2 border-neutral text-accent"
+                  className="input w-full border-2 border-neutral text-black "
                   defaultValue="{user?.email}"
                   readOnly
                   id="seller-email"
@@ -131,7 +134,7 @@ const AddProducta = () => {
                 <input
                   type="text"
                   placeholder="phone number"
-                  className="input w-full border-2 border-neutral text-accent"
+                  className="input w-full border-2 border-neutral text-black"
                   id="seller-number"
                   {...register("phone", {
                     required: "must enter phone number",
@@ -149,7 +152,7 @@ const AddProducta = () => {
                 <input
                   type="text"
                   placeholder="original-price"
-                  className="input w-full border-2 border-neutral text-accent"
+                  className="input w-full border-2 border-neutral text-black"
                   id="original-price"
                   {...register("originalPrice", {
                     required: "must enter the price: ",
@@ -167,7 +170,7 @@ const AddProducta = () => {
                 <input
                   type="text"
                   placeholder="resellPrice"
-                  className="input w-full border-2 border-neutral text-accent"
+                  className="input w-full border-2 border-neutral text-black"
                   id="resellPrice"
                   {...register("resellPrice", {
                     required: "must enter a price: ",
@@ -185,7 +188,7 @@ const AddProducta = () => {
                 <input
                   type="text"
                   placeholder="years of use"
-                  className="input w-full border-2 border-neutral text-accent "
+                  className="input w-full border-2 border-neutral  text-black"
                   id="yearsOfUse"
                   {...register("yearsOfUse", {
                     required: "must enter how many years use.",
@@ -203,7 +206,7 @@ const AddProducta = () => {
                 <input
                   type="text"
                   placeholder="location"
-                  className="input w-full border-2 border-neutral text-accent "
+                  className="input w-full border-2 border-neutral  text-black"
                   id="location"
                   {...register("sellerLocation", {
                     required: "enter a location",
@@ -225,7 +228,7 @@ const AddProducta = () => {
                   <select
                     name="category"
                     id="category"
-                    className="input w-full border-2 border-neutral text-neutral "
+                    className="input w-full border-2 border-neutral text-black"
                     {...register("category", {
                       required: "please select a category",
                     })}
@@ -306,7 +309,7 @@ const AddProducta = () => {
                     type="file"
                     id="image"
                     placeholder="image"
-                    className="placeholder:text-accent text-base"
+                    className="placeholder: text-base "
                     {...register("image", {
                       required: "must upload an image",
                     })}
@@ -328,7 +331,7 @@ const AddProducta = () => {
                 id="message"
                 cols="30"
                 rows="5"
-                className="rounded-lg text-accent p-3"
+                className="rounded-lg  text-black p-3"
                 placeholder="Message"
                 {...register("description", {
                   required: "must enter a description",
@@ -343,7 +346,7 @@ const AddProducta = () => {
             <div className="flex items-center justify-center  mt-4">
               <button
                 type="submit"
-                className="bg-primary text-secondary text-xl px-6 rounded-3xl hover:bg-transparent hover:text-primary  hover:border-2 border-primary transition-all duration-500   py-1 "
+                className="bg-primary text-xl px-8 rounded-3xl hover:bg-transparent hover:text-primary   hover:border-2 border-primary transition-all duration-500   py-3 "
               >
                 Add Product{" "}
               </button>

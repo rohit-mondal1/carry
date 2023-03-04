@@ -3,17 +3,27 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+
+
+  const handleAddProduct = (e) => {
+  e.preventDefault()
+  
+  const from = e.target.value;
+  const email = from.email
+  const password = from.password
+  };
   return (
     <div>
       <div className="w-full mx-auto my-6 max-w-md p-8 space-y-3 rounded-xl bg-slate-900 text-gray-100">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <form className="space-y-6 ng-untouched ng-pristine ng-valid">
+        <form onSubmit={handleAddProduct} className="space-y-6 ng-untouched ng-pristine ng-valid">
           <div className="space-y-1 text-sm">
-            <label for="username" className="block text-gray-400">
-              Email
+            <label for="username" className="block text-gray-100">
+              Email *
             </label>
             <input
               type="email"
+              required
               name="username"
               id="username"
               placeholder="Username"
@@ -21,18 +31,19 @@ const Login = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="password" className="block text-gray-400">
-              Password
+            <label for="password" className="block text-gray-100">
+              Password *
             </label>
             <input
               type="password"
+              required
               name="password"
               id="password"
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-100 focus:border-violet-400"
+              className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-violet-400"
             />
           </div>
-          <button className="block w-full p-3 text-center rounded-sm text-gray-900 bg-blue-500">
+          <button className="block w-full p-3 text-center rounded-sm text-white bg-blue-600 btn">
             Log in
           </button>
         </form>
