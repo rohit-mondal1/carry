@@ -1,9 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { RiImageAddFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Components/Context/UserContext";
 
 const AddProducta = () => {
+  const { usersType } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,10 +22,10 @@ const AddProducta = () => {
       return data;
     },
   });
-  if(isLoading){
+  if (isLoading) {
     return;
   }
-  
+
   const imageHostKey = "df1509eeb08fa7011ab2697f6fe3f944";
   // from handler
   const handleAddProduct = (data) => {
@@ -54,7 +59,20 @@ const AddProducta = () => {
             yearsOfUse: data.yearsOfUse,
             description: data.description,
           };
-          console.log(product);
+          fetch("http://localhost:8000/product", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(product),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                navigate("/");
+                return toast.success(' post success full !!')
+              }
+            });
         }
       });
   };
@@ -76,14 +94,14 @@ const AddProducta = () => {
                   className="capitalize text-xl font-semibold"
                   htmlFor="sellerName"
                 >
-                  Seller Name :
+                  Seller Name <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Name"
-                  className="input w-full border-2 border-neutral "
+                  className="input w-full  text-black border-2 border-neutral "
                   id="sellerName"
-                  defaultValue="{user?.displayName}"
+                  defaultValue={usersType?.name}
                   readOnly
                   {...register("sellerName")}
                 />
@@ -93,7 +111,7 @@ const AddProducta = () => {
                   className="capitalize text-xl font-semibold"
                   htmlFor="product-name"
                 >
-                  Product Name :
+                  Product Name <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -111,13 +129,13 @@ const AddProducta = () => {
                   className="capitalize text-xl font-semibold"
                   htmlFor="email"
                 >
-                  Email :
+                  Email <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="email"
                   placeholder="email"
                   className="input w-full border-2 border-neutral text-black "
-                  defaultValue="{user?.email}"
+                  defaultValue={usersType?.email}
                   readOnly
                   id="seller-email"
                   {...register("email")}
@@ -129,7 +147,7 @@ const AddProducta = () => {
                   className="capitalize text-xl font-semibold"
                   htmlFor="phone"
                 >
-                  phone :
+                  phone <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -147,7 +165,7 @@ const AddProducta = () => {
                   className="capitalize text-xl font-semibold"
                   htmlFor="original-price"
                 >
-                  Original price :
+                  Original price <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -165,7 +183,7 @@ const AddProducta = () => {
                   className="capitalize text-xl font-semibold"
                   htmlFor="resellPrice"
                 >
-                  reselling price :
+                  reselling price <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -183,7 +201,7 @@ const AddProducta = () => {
                   className="capitalize text-xl font-semibold"
                   htmlFor="yearsOfUse"
                 >
-                  Years of Use :{" "}
+                  Years of Use <span className="text-red-600">*</span>{" "}
                 </label>
                 <input
                   type="text"
@@ -201,7 +219,7 @@ const AddProducta = () => {
                   className="capitalize text-xl font-semibold"
                   htmlFor="location"
                 >
-                  location :
+                  location <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -222,7 +240,7 @@ const AddProducta = () => {
                   className="capitalize font-semibold text-xl"
                   htmlFor="product-category"
                 >
-                  category:
+                  category <span className="text-red-600">*</span>
                 </label>
                 <div>
                   <select
@@ -234,7 +252,7 @@ const AddProducta = () => {
                     })}
                   >
                     {categories?.map((category) => (
-                      <option key={category._id} value={category._id}>
+                      <option key={category._id} value={category.name}>
                         {category.name}
                       </option>
                     ))}
@@ -246,7 +264,7 @@ const AddProducta = () => {
                     className="capitalize text-xl font-semibold my-2 block"
                     htmlFor="condition"
                   >
-                    Condition :
+                    Condition <span className="text-red-600">*</span>
                   </label>
                   <div className="flex  gap-3 capitalize">
                     <label htmlFor="excellent">
@@ -297,7 +315,7 @@ const AddProducta = () => {
                   htmlFor="image"
                   className="text-xl capitalize font-semibold "
                 >
-                  Upload Image:
+                  Upload Image <span className="text-red-600">*</span>
                 </label>
                 <label
                   htmlFor="image"
@@ -324,7 +342,7 @@ const AddProducta = () => {
                 htmlFor="message"
                 className="text-white font-semibold capitalize text-xl "
               >
-                message :
+                message <span className="text-red-600">*</span>
               </label>
               <textarea
                 name="message"

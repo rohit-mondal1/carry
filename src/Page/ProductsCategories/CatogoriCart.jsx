@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./catogory.css";
 
 const CatogoriCart = ({ product }) => {
@@ -15,7 +16,9 @@ const CatogoriCart = ({ product }) => {
         </div>
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold my-3">{name}</h1>
-          <button className="btn bg-blue-600 px-4 mt-6">see Products..</button>
+          <Link to={`/products/${name}`}>
+          <button  className="btn bg-blue-600 px-4 mt-6">see Products..</button>
+          </Link>
         </div>
       </div>
     </div>

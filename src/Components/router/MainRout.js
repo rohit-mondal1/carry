@@ -32,6 +32,11 @@ export const router = createBrowserRouter([
         element: <Products />,
       },
       {
+        path: "Products/:name",
+        element: <Products />,
+        loader: async({params})=>fetch(`http://localhost:8000/Products/${params.name}`)
+      },
+      {
         path: "/blog",
         element: <Blog />,
       },
@@ -51,34 +56,34 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/DashBord/me",
-        element:<MyBook/>
+        element: <MyBook />,
       },
       {
         path: "/DashBord/my_book",
-        element:<MyBook/>
+        element: <MyBook />,
       },
       // seller
       {
         path: "/DashBord/add_Products",
-        element:<AddProducta/>
+        element: <AddProducta />,
       },
       {
         path: "/DashBord/my_Post",
-        element:<MyPost/>
+        element: <MyPost />,
       },
       // admin
       {
         path: "/DashBord/All_Buyers",
-        element:<AllBuyers/>
+        element: <AllBuyers />,
       },
       {
         path: "/DashBord/All_Seller",
-        element:<AllSellers/>
+        element: <AllSellers />,
       },
-      
+
       {
         path: "/DashBord/Reported_Items",
-        element:<ReportedItems/>
+        element: <ReportedItems />,
       },
     ],
   },
