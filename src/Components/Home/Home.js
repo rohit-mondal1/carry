@@ -1,9 +1,29 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext, useEffect } from 'react';
 import ProductsCategories from "../../Page/ProductsCategories/ProductsCategories";
+import { AuthContext } from '../Context/UserContext';
 import Hero from "./Hero";
 import OurServices from './OurServices/OurServices';
 
 const Home = () => {
+  const {setUsersType , user} = useContext(AuthContext)
+  const email = user?.email;
+ 
+  const { data = [] } = useQuery({
+    queryKey: ["email"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:8000/users?gmail=${email}`);
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  useEffect(() => {
+    for (const datas of data) {
+      setUsersType(datas);
+    }
+    
+  }, [data ,setUsersType]);
   return (
     <div>
       <div>

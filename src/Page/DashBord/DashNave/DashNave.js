@@ -1,37 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Components/Context/UserContext";
 
 const DashNave = () => {
-  const { user } = useContext(AuthContext);
-  const [users, setUsers] = useState({});
-  const email = user?.email;
- 
-  const { data = [] } = useQuery({
-    queryKey: ["email"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:8000/users?gmail=${email}`);
-      const data = await res.json();
-      return data;
-    },
-  });
+  const { usersType  } = useContext(AuthContext);
 
-  useEffect(() => {
-    for (const datas of data) {
-      setUsers(datas);
-    }
-    for (const datas of data) {
-      setUsers(datas);
-    }
-  }, [data]);
+  
 
   const manuList = (
     <>
-      {users?.type === "Buyer" ? (
+      {usersType?.type === "Buyer" ? (
         <>
           <li>
-            <NavLink to="/DashBord">My Profile</NavLink>
+            <NavLink to="/DashBord/me">My Profile</NavLink>
           </li>
           <li>
             <NavLink to="/DashBord/my_book">My Book</NavLink>
@@ -39,7 +20,7 @@ const DashNave = () => {
         </>
       ) : undefined}
 
-      {users?.type === "Seller" ? (
+      {usersType?.type === "Seller" ? (
         <>
           <li>
             <NavLink to="/DashBord">My Profile</NavLink>
@@ -48,11 +29,11 @@ const DashNave = () => {
             <NavLink to="/DashBord/add_Products">Add Products</NavLink>
           </li>
           <li>
-            <NavLink to="/DashBord/my_Products">My Products</NavLink>
+            <NavLink to="/DashBord/my_Post">My Products</NavLink>
           </li>
         </>
       ) : undefined}
-      {users?.type === "Admin" ? (
+      {usersType?.type === "Admin" ? (
         <>
           <li>
             <NavLink to="/DashBord">My Profile</NavLink>

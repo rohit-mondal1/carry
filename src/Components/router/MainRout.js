@@ -1,7 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashBordLayout from "../../Layout/DashBordLayout";
 import Main from "../../Layout/Main";
-import DashBord from "../../Page/DashBord/DashBord";
+import AllBuyers from "../../Page/DashBord/Admin/AllBuyers";
+import AllSellers from "../../Page/DashBord/Admin/AllSellers";
+import ReportedItems from "../../Page/DashBord/Admin/ReportedItems";
+import MyBook from "../../Page/DashBord/Buyer/MyBook";
+import AddProducta from "../../Page/DashBord/Seller/AddProducta";
+import MyPost from "../../Page/DashBord/Seller/MyPost";
 import Products from "../../Page/Products/Products";
 import Login from "../Authencations/Login";
 import SignUp from "../Authencations/SignUp";
@@ -45,32 +50,35 @@ export const router = createBrowserRouter([
     element: <DashBordLayout />,
     children: [
       {
-        path: "/DashBord/my_book",
-        element:<DashBord/>
+        path: "/DashBord/me",
+        element:<MyBook/>
       },
+      {
+        path: "/DashBord/my_book",
+        element:<MyBook/>
+      },
+      // seller
       {
         path: "/DashBord/add_Products",
-        element:<DashBord/>
+        element:<AddProducta/>
       },
       {
-        path: "/DashBord/my_Products",
-        element:<DashBord/>
+        path: "/DashBord/my_Post",
+        element:<MyPost/>
       },
+      // admin
       {
         path: "/DashBord/All_Buyers",
-        element:<DashBord/>
+        element:<AllBuyers/>
       },
       {
         path: "/DashBord/All_Seller",
-        element:<DashBord/>
+        element:<AllSellers/>
       },
-      {
-        path: "/DashBord/my_Products",
-        element:<DashBord/>
-      },
+      
       {
         path: "/DashBord/Reported_Items",
-        element:<DashBord/>
+        element:<ReportedItems/>
       },
     ],
   },
