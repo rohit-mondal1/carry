@@ -39,6 +39,7 @@ const loginGoogle=()=>{
   }
   },[])
   
+  
   const authInfo = {user,loder ,signup, logOut ,logIn,loginGoogle}
   return (
     <div>

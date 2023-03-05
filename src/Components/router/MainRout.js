@@ -45,7 +45,31 @@ export const router = createBrowserRouter([
     element: <DashBordLayout />,
     children: [
       {
-        path: "/DashBord",
+        path: "/DashBord/my_book",
+        element:<DashBord/>
+      },
+      {
+        path: "/DashBord/add_Products",
+        element:<DashBord/>
+      },
+      {
+        path: "/DashBord/my_Products",
+        element:<DashBord/>
+      },
+      {
+        path: "/DashBord/All_Buyers",
+        element:<DashBord/>
+      },
+      {
+        path: "/DashBord/All_Seller",
+        element:<DashBord/>
+      },
+      {
+        path: "/DashBord/my_Products",
+        element:<DashBord/>
+      },
+      {
+        path: "/DashBord/Reported_Items",
         element:<DashBord/>
       },
     ],
