@@ -23,7 +23,7 @@ const DashNave = () => {
       {usersType?.type === "Seller" ? (
         <>
           <li>
-            <NavLink to="/DashBord">My Profile</NavLink>
+            <NavLink to="/DashBord/me">My Profile</NavLink>
           </li>
           <li>
             <NavLink to="/DashBord/add_Products">Add Products</NavLink>

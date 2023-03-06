@@ -60,6 +60,10 @@ export const router = createBrowserRouter([
         element: <Profile />,
       },
       {
+        path: "/DashBord/me",
+        element: <Profile />,
+      },
+      {
         path: "/DashBord/my_book",
         element: <MyBook />,
       },

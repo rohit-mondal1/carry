@@ -36,67 +36,59 @@ const Header = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-        <NavLink to="/home">Home</NavLink>
-      </li>
+              <NavLink to="/home">Home</NavLink>
+            </li>
 
-      <li>
-        <NavLink to="/Products">Products</NavLink>
-      </li>
-
-      <li>
-        <NavLink to="/DashBord">DashBord</NavLink>
-      </li>
-      <li>
-        <NavLink to="/blog">Blogs</NavLink>
-      </li>
-      {user?.uid ? (
-        <li >
-          <button onClick={handelclick}>LogI Out</button>
-        </li>
-      ) : (
-        <>
-          <li>
-            <NavLink to="/LogIn">LogIn</NavLink>
-          </li>
-          <li>
-            <NavLink to="/Register">Register</NavLink>
-          </li>
-        </>
-      )}
+            <li>
+              <NavLink to="/DashBord">DashBord</NavLink>
+            </li>
+            <li>
+              <NavLink to="/blog">Blogs</NavLink>
+            </li>
+            {user?.uid ? (
+              <li>
+                <button onClick={handelclick}>LogI Out</button>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <NavLink to="/LogIn">LogIn</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/Register">Register</NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
       {/* lg  */}
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal p-0 text-xl font-semibold text-blue-800">
-        <li>
-        <NavLink to="/home">Home</NavLink>
-      </li>
-
-      <li>
-        <NavLink to="/Products">Products</NavLink>
-      </li>
-
-      <li>
-        <NavLink to="/DashBord">DashBord</NavLink>
-      </li>
-      <li>
-        <NavLink to="/blog">Blogs</NavLink>
-      </li>
-      {user?.uid ? (
-        <li >
-          <button onClick={handelclick}>LogI Out</button>
-        </li>
-      ) : (
-        <>
           <li>
-            <NavLink to="/LogIn">LogIn</NavLink>
+            <NavLink to="/home">Home</NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/DashBord">DashBord</NavLink>
           </li>
           <li>
-            <NavLink to="/Register">Register</NavLink>
+            <NavLink to="/blog">Blogs</NavLink>
           </li>
-        </>
-      )}
+          {user?.uid ? (
+            <li>
+              <button onClick={handelclick}>LogI Out</button>
+            </li>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/LogIn">LogIn</NavLink>
+              </li>
+              <li>
+                <NavLink to="/Register">Register</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>
