@@ -1,11 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import { MdVerified } from "react-icons/md";
 import { BsFlagFill } from "react-icons/bs";
+import { AuthContext } from "../../Components/Context/UserContext";
+import { toast } from "react-hot-toast";
 
 const ProductsCard = ({ PRODUCT }) => {
+  const { user } = useContext(AuthContext);
+  const [productData, setProductData] = useState({});
+
   const {
-    _id,
     condition,
     email,
     image,
@@ -36,8 +39,42 @@ const ProductsCard = ({ PRODUCT }) => {
     //    }
     // )
 
-    console.log(product);
+    setProductData(product);
   };
+
+  const handelSubmite = (e) => {
+    e.preventDefault();
+    const phone = e.target.username.value;
+    const location = e.target.location.value;
+    const data = {
+      phone,
+      location,
+      email: user?.email,
+      img: productData?.image,
+      id: productData?._id,
+      price: productData?.resellPrice,
+      productName:productData?.productName
+    };
+console.log(data);
+
+
+    fetch("http://localhost:8000/booking", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((datas) => {
+        if (datas.acknowledged) {
+          return toast.success(' Book success full !!')
+        }
+      });
+  };
+  
+
+
 
   return (
     <div>
@@ -94,14 +131,71 @@ const ProductsCard = ({ PRODUCT }) => {
             <p>{description}</p>
           </div>
           <div>
-            <Link >
-              <button className="px-2 py-2 border-red-700 border-2 bg-blue-800  text-white inline-block mr-2 rounded-xl font-bold  capitalize w-full text-xl ">
-                Book Now
-              </button>
-            </Link>
+            {/* <button>Book Now</button> */}
+            <label
+              htmlFor="my-modal-3"
+              onClick={() => {
+                handleReport(PRODUCT);
+              }}
+              className="px-2 py-2 btn border-red-700 border-2 bg-blue-800  text-white inline-block mr-2 rounded-xl font-bold  capitalize w-full text-xl "
+            >
+              Book Now
+            </label>
           </div>
         </div>
         <div></div>
+      </div>
+
+
+      {/* Put this part before </body> tag */}
+     
+      <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative">
+          <label
+            htmlFor="my-modal-3"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-900 text-gray-100">
+            <h1 className="text-2xl font-bold text-center">Login</h1>
+            <form
+              onSubmit={handelSubmite}
+              className="space-y-6 ng-untouched ng-pristine ng-valid"
+            >
+              <div className="space-y-1 text-sm">
+                <label htmlFor="username" className="block text-gray-400">
+                  Number
+                </label>
+                <input
+                  required
+                  type="number"
+                  name="username"
+                  id="username"
+                  placeholder="Number"
+                  className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-violet-400"
+                />
+              </div>
+              <div className="space-y-1 text-sm">
+                <label htmlFor="location" className="block text-gray-400">
+                  Location
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="location"
+                  id="location"
+                  placeholder="location"
+                  className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-violet-400"
+                />
+              </div>
+              <button className="block w-full p-3 btn text-center rounded-sm text-gray-100 bg-blue-600">
+                Book Now
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
