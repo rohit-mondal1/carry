@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { AuthContext } from "../Context/Usercontext";
+import { AuthContext } from "../Context/UserContext";
+
 
 const PrivateRout = ({ children }) => {
   const { user, loder } = useContext(AuthContext);
-  const location = useLocation();
+  const location = new  useLocation();
 
   if (loder) {
     return (
@@ -18,7 +19,7 @@ const PrivateRout = ({ children }) => {
       </div>
     );
   }
-  if (user) {
+  if (user?.uid) {
     return children;
   }
 

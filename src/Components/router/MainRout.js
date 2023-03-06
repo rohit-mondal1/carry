@@ -14,6 +14,10 @@ import SignUp from "../Authencations/SignUp";
 import Blog from "../Blog/Blog";
 import Error from "../Error/Error";
 import Home from "../Home/Home";
+import AdminRouter from "./AdminRouter";
+import BuyerRouter from "./BuyerRouter";
+import PrivateRout from "./PrivateRout";
+import SellerRout from "./SellerRout";
 
 export const router = createBrowserRouter([
   {
@@ -57,7 +61,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/DashBord",
-        element: <Profile />,
+        element:<PrivateRout><Profile /></PrivateRout> ,
       },
       {
         path: "/DashBord/me",
@@ -65,30 +69,30 @@ export const router = createBrowserRouter([
       },
       {
         path: "/DashBord/my_book",
-        element: <MyBook />,
+        element: <BuyerRouter><MyBook/></BuyerRouter> ,
       },
       // seller
       {
         path: "/DashBord/add_Products",
-        element: <AddProducta />,
+        element: <SellerRout><AddProducta/></SellerRout> ,
       },
       {
         path: "/DashBord/my_Post",
-        element: <MyPost />,
+        element:<SellerRout><MyPost/></SellerRout> ,
       },
       // admin
       {
         path: "/DashBord/All_Buyers",
-        element: <AllBuyers />,
+        element: <AdminRouter><AllBuyers /></AdminRouter>,
       },
       {
         path: "/DashBord/All_Seller",
-        element: <AllSellers />,
+        element: <AdminRouter><AllSellers /></AdminRouter> ,
       },
 
       {
         path: "/DashBord/Reported_Items",
-        element: <ReportedItems />,
+        element: <AdminRouter><ReportedItems /></AdminRouter> ,
       },
     ],
   },
