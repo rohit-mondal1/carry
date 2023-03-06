@@ -106,10 +106,10 @@ const ProductsCard = ({ PRODUCT }) => {
                 posted at: {postTime} on {postDate}{" "}
               </p>
               <button className="px-2 py-1 bg-stone-200 text-black inline-block mr-2 rounded-xl font-semibold capitalize">
-                price: ${resellPrice}
+                price: {resellPrice} RS
               </button>
               <button className="px-2 py-1 bg-stone-200 text-black inline-block mr-2 rounded-xl font-semibold capitalize">
-                regular: ${originalPrice}
+                regular: {originalPrice} RS
               </button>
             </div>
             <div className="capitalize">

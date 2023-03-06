@@ -53,7 +53,9 @@ const MyPost = () => {
       {data?.length === 0 ? (
         <h1 className="text-black text-center my-8 text-2xl">
           No Data Plies{" "}
-          <Link className="text-red-800 underline" to='/DashBord/add_Products'>Add Products..</Link>
+          <Link className="text-red-800 underline" to="/DashBord/add_Products">
+            Add Products..
+          </Link>
         </h1>
       ) : (
         <div className=" w-full">
@@ -73,9 +75,8 @@ const MyPost = () => {
                     <th>posted date</th>
                     <th>posted time</th>
                     <th>price</th>
-                    
+
                     <th>Action</th>
-                    
                   </tr>
                 </thead>
                 <tbody className="text-black font-semibold text-center ">
@@ -83,28 +84,29 @@ const MyPost = () => {
                     <tr key={product._id}>
                       <th>{idx + 1}</th>
                       <td>
-
-                      <div className="avatar">
-  <div className="w-12 rounded">
-    <img src={product?.image} alt="Tailwind-CSS-Avatar-component" />
-  </div>
-</div>
-
+                        <div className="avatar">
+                          <div className="w-12 rounded">
+                            <img
+                              src={product?.image}
+                              alt="Tailwind-CSS-Avatar-component"
+                            />
+                          </div>
+                        </div>
                       </td>
                       <td>{product.productName}</td>
                       <td>{product.postDate}</td>
                       <td>{product.postTime}</td>
-                      <td>${product.resellPrice}</td>
-                      
-                      
-                      <td>
-                        
-                          <button onClick={()=>{handelDelete(product._id)}}>
-                            <AiFillCloseCircle className="text-center text-2xl font-bold text-red-500  "></AiFillCloseCircle>
-                          </button>
-                       
-                      </td>
+                      <td>{product.resellPrice} RS</td>
 
+                      <td>
+                        <button
+                          onClick={() => {
+                            handelDelete(product._id);
+                          }}
+                        >
+                          <AiFillCloseCircle className="text-center text-2xl font-bold text-red-500  "></AiFillCloseCircle>
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

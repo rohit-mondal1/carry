@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect } from 'react';
 import ProductsCategories from "../../Page/ProductsCategories/ProductsCategories";
 import { AuthContext } from '../Context/UserContext';
+import AdvertisingProduct from './AdvertisingProduct/AdvertisingProduct';
 import Hero from "./Hero";
 import OurServices from './OurServices/OurServices';
 
@@ -40,6 +41,18 @@ const Home = () => {
         <h1 className='text-center pl-8 my-8 text-xl'>Product's all categories are available here. You can see all product's here by clicking our categories .</h1>
         <div>
           <ProductsCategories />
+        </div>
+      </div>
+      {/* add */}
+      <div className='my-14'>
+        <dir className="justify-center text-center ">
+          <span className="text-5xl font-semibold border-b-2 text-blue-800 border-black">
+           Advertising Products
+          </span>
+        </dir>
+        {/* <h1 className='text-center pl-8 my-8 text-xl'>Product's all categories are available here. You can see all product's here by clicking our categories .</h1> */}
+        <div>
+          <AdvertisingProduct />
         </div>
       </div>
 

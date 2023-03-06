@@ -92,7 +92,7 @@ const MyBook = () => {
                       <td>{product.productName}</td>
                       <td>{product.phone}</td>
                       <td>{product.location}</td>
-                      <td>${product.price}</td>
+                      <td>{product.price} RS</td>
                       <td><button className="btn btn-sm btn-success">pay</button></td>
 
                       <td>

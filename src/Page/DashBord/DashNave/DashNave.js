@@ -36,10 +36,10 @@ const DashNave = () => {
       {usersType?.type === "Admin" ? (
         <>
           <li>
-            <NavLink to="/DashBord">My Profile</NavLink>
+            <NavLink to="/DashBord/me">My Profile</NavLink>
           </li>
           <li>
-            <NavLink to="/All_Buyers">All Buyers</NavLink>
+            <NavLink to="/DashBord/All_Buyers">All Buyers</NavLink>
           </li>
 
           <li>

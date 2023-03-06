@@ -18,7 +18,7 @@ const AdminRouter = ({children}) => {
       </div>
     );
   }
-  if (usersType.type === "Buyer") {
+  if (usersType.type === "Admin") {
     return children;
   }
 
