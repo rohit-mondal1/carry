@@ -8,6 +8,7 @@ import MyBook from "../../Page/DashBord/Buyer/MyBook";
 import AddProducta from "../../Page/DashBord/Seller/AddProducta";
 import MyPost from "../../Page/DashBord/Seller/MyPost";
 import Products from "../../Page/Products/Products";
+import Profile from "../../Page/Profile/Profile";
 import Login from "../Authencations/Login";
 import SignUp from "../Authencations/SignUp";
 import Blog from "../Blog/Blog";
@@ -55,8 +56,8 @@ export const router = createBrowserRouter([
     element: <DashBordLayout />,
     children: [
       {
-        path: "/DashBord/me",
-        element: <MyBook />,
+        path: "/DashBord",
+        element: <Profile />,
       },
       {
         path: "/DashBord/my_book",
