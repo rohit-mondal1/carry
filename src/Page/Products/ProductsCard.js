@@ -55,7 +55,6 @@ const ProductsCard = ({ PRODUCT }) => {
       price: productData?.resellPrice,
       productName:productData?.productName
     };
-console.log(data);
 
 
     fetch("http://localhost:8000/booking", {
@@ -68,6 +67,7 @@ console.log(data);
       .then((res) => res.json())
       .then((datas) => {
         if (datas.acknowledged) {
+          e.target.reset()
           return toast.success(' Book success full !!')
         }
       });

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Components/Context/UserContext";
@@ -7,7 +8,7 @@ import { AuthContext } from "../../../Components/Context/UserContext";
 const MyBook = () => {
   const { user } = useContext(AuthContext);
   const email = user?.email;
-  const { data } = useQuery({
+  const { data = [] , refetch , isLoading} = useQuery({
     queryKey: ["email"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:8000/booking?email=${email}`);
@@ -15,18 +16,40 @@ const MyBook = () => {
       return data;
     },
   });
+  if(isLoading){
+    return (
+      <div className="w-16 h-16 mx-auto my-auto border-4 border-dashed rounded-full animate-spin border-violet-400"></div>
+    )
+  }
 
-  const handelDelete = () => {};
+  const handelDelete = (id) => {
 
-  console.log("data", data);
+    const conformation = window.confirm("Are you sore !!");
+    if (conformation) {
+      fetch(`http://localhost:8000/Order/${id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            refetch();
+            return toast.success("Delete Success Full !!");
+          }
+        });
+    }
+  };
+
   return (
     <div>
       <div></div>
       {data?.length === 0 ? (
         <h1 className="text-black text-center my-8 text-2xl">
           No Data Plies{" "}
-          <Link className="text-red-800 underline" to="/DashBord/add_Products">
-            Add Products..
+          <Link className="text-red-800 underline" to="/">
+            Add book..
           </Link>
         </h1>
       ) : (
@@ -70,7 +93,7 @@ const MyBook = () => {
                       <td>{product.phone}</td>
                       <td>{product.location}</td>
                       <td>${product.price}</td>
-                      <td>pay</td>
+                      <td><button className="btn btn-sm btn-success">pay</button></td>
 
                       <td>
                         <button
