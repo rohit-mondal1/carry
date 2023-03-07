@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-const Modal = ({ modal, refetch, setModal }) => {
+const Modal = ({ modal, htmlFor,refetch, setModal }) => {
   const { price, _id } = modal;
   const [errord, setErrord] = useState("");
   const stripe = useStripe();
@@ -83,10 +83,10 @@ const Modal = ({ modal, refetch, setModal }) => {
 
 
 <div >
-<input type="checkbox" id="my-modal-3" className="modal-toggle" />
+{/* <input type="checkbox" id={htmlFor} className="modal-toggle" />
 <div className="modal">
   <div className="modal-box relative">
-    <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+    <label htmlFor={htmlFor} className="btn btn-sm btn-circle absolute right-2 top-2">✕</label> */}
    
     <form onSubmit={handleSubmit}>
           <CardElement
@@ -117,8 +117,8 @@ const Modal = ({ modal, refetch, setModal }) => {
         </form>
 
 
-  </div>
-</div>
+  {/* </div>
+</div> */}
 </div>
 
 // <div className="relative ">

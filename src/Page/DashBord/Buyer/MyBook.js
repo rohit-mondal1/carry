@@ -15,7 +15,7 @@ const stripePromise = loadStripe(
 const MyBook = () => {
   const { user } = useContext(AuthContext);
   const [modal, setModal] = useState(null);
-  const [errord, setErrord] = useState("");
+  const [htmlFor, sethtmlFor] = useState("my-modal-3");
   
   
 
@@ -119,7 +119,7 @@ const MyBook = () => {
                         <td>{product.location}</td>
                         <td>{product.price} RS</td>
                         <td>
-                          <label htmlFor="my-modal-3">
+                          <label htmlFor={htmlFor}>
 
                           <button
                             onClick={() => {
@@ -154,7 +154,7 @@ const MyBook = () => {
 
       {modal && (
         <Elements stripe={stripePromise}>
-          <Modal modal={modal} setModal ={setModal} refetch ={refetch}></Modal>
+          <Modal htmlFor={htmlFor} modal={modal} setModal ={setModal} refetch ={refetch}></Modal>
         </Elements>
        )} 
     </div>
