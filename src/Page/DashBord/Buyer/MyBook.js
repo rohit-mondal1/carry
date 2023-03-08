@@ -15,7 +15,7 @@ const stripePromise = loadStripe(
 const MyBook = () => {
   const { user } = useContext(AuthContext);
   const [modal, setModal] = useState(null);
-  const [htmlFor, sethtmlFor] = useState("my-modal-3");
+  
   
   
 
@@ -62,12 +62,8 @@ const MyBook = () => {
     console.log("product", product);
   };
 
-
-
-
-
   return (
-    <div>
+    <div className="relative">
       <div></div>
       <div>
         {data?.length === 0 ? (
@@ -124,16 +120,14 @@ const MyBook = () => {
                               okay
                             </button>
                           ) : (
-                            <label htmlFor={htmlFor}>
-                              <button
-                                onClick={() => {
-                                  handelPay(product);
-                                }}
-                                className="btn btn-sm btn-success"
-                              >
-                                pay
-                              </button>
-                            </label>
+                            <button
+                              onClick={() => {
+                                handelPay(product);
+                              }}
+                              className="btn btn-sm btn-success"
+                            >
+                              pay
+                            </button>
                           )}
                         </td>
 
@@ -155,18 +149,14 @@ const MyBook = () => {
           </div>
         )}
       </div>
-      {/* modal={modal}  setModal ={setModal} refetch ={refetch} */}
 
-      {modal && (
-        <Elements stripe={stripePromise}>
-          <Modal
-            htmlFor={htmlFor}
-            modal={modal}
-            setModal={setModal}
-            refetch={refetch}
-          ></Modal>
-        </Elements>
-      )}
+      <div className="absolute top-1/2 left-1/3 right-1/3 z-50 bg-slate-400">
+        {modal && (
+          <Elements stripe={stripePromise}>
+            <Modal modal={modal} setModal={setModal} refetch={refetch}></Modal>
+          </Elements>
+        )}
+      </div>
     </div>
   );
 };

@@ -72,64 +72,56 @@ const Modal = ({ modal, htmlFor,refetch, setModal }) => {
         .then((data) => {
           if (data.modifiedCount) {
             refetch();
-            setModal("");
+            setModal(null);
             toast.success("success full payment !!");
           }
         });
     }
   };
+
+  const handelColge = () => {
+    setModal(null);
+  };
   return (
+    <div>
 
 
-
-<div >
-{/* <input type="checkbox" id={htmlFor} className="modal-toggle" />
-<div className="modal">
-  <div className="modal-box relative">
-    <label htmlFor={htmlFor} className="btn btn-sm btn-circle absolute right-2 top-2">✕</label> */}
-   
-    <form onSubmit={handleSubmit}>
-          <CardElement
-            className="border-2 mt-5 p-3 rounded-sm"
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#dfe5eb",
-                  "::placeholder": {
-                    color: "#dfe5eb",
-                  },
-                },
-                invalid: {
-                  color: "#dfe5eb",
+      <form className="w-[400px] mx-auto  p-4" onSubmit={handleSubmit}>
+        <h1
+          onClick={handelColge}
+          className=" btn justify-end ml-[315px] text-2xl font-bold "
+        >
+          ✕
+        </h1>
+        <CardElement
+          className="border-2 mt-5 p-3 rounded-sm"
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                border: "black solid 2px",
+                color: "#FF0000",
+                "::placeholder": {
+                  color: "#000000",
                 },
               },
-            }}
-          />
-          <button
-            className="w-full mt-3 text-center btn btn-primary"
-            type="submit"
-            disabled={!stripe}
-          >
-            Pay
-          </button>
-          <p className="text-red-600">{errord}</p>
-        </form>
-
-
-  {/* </div>
-</div> */}
-</div>
-
-// <div className="relative ">
-
-
-//   <div className="w-[400px] absolute top-0 left-0 right-0">
-    
-//   </div>
-// </div>
-
-
+              invalid: {
+                color: "#FF0000",
+              },
+            },
+          }}
+        />
+        <button
+          className="w-full mt-3 text-center btn btn-primary"
+          type="submit"
+          disabled={!stripe}
+        >
+          Pay
+        </button>
+        <p className="text-red-600">{errord}</p>
+      </form>
+    </div>
+   
   );
 };
 
