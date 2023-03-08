@@ -11,7 +11,6 @@ const ProductsCard = ({ PRODUCT }) => {
   
   const {
     condition,
-    
     email,
     image,
     location,
@@ -70,28 +69,30 @@ const ProductsCard = ({ PRODUCT }) => {
   
   const handelsub= e =>{
     e.preventDefault();
-    const data = {
-      email: user?.email,
-      img: productTow?.image,
-      id: productTow?._id,
-      price: productTow?.resellPrice,
-      productName:productTow?.productName
-    };
-    fetch("http://localhost:8000/reportadedItems", {
-      method: "POST",
+    // const data = {
+    //   email: user?.email,
+    //   img: productTow?.image,
+    //   id: productTow?._id,
+    //   price: productTow?.resellPrice,
+    //   productName:productTow?.productName
+    // };
+    console.log("object" ,productTow?._id );
+    fetch(`http://localhost:8000/postreop?id=${productTow?._id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((datas) => {
-        if (datas.acknowledged) {
-          
-          productTow(null)
-          return toast.success(' Book success full !!')
+      .then((data) => {
+        if (data.acknowledged) {
+          // refetch();
+          setProductTow(null);
+          return toast.success("report Success Full !!");
         }
       });
+        // 
+      
   }
   
 

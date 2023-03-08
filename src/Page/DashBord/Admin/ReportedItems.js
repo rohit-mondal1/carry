@@ -5,7 +5,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const ReportedItems = () => {
-  const { data = [], refetch } = useQuery({
+  const { data = [], refetch , isLoading } = useQuery({
     queryKey: ["report"],
     queryFn: async () => {
       const res = await fetch("http://localhost:8000/report");
@@ -14,24 +14,26 @@ const ReportedItems = () => {
     },
   });
 
-  console.log(data);
+ if(isLoading){
+  return
+ }
 
-  const handelDelete = (id) => {
+  const handelDelete = (id ) => {
     const conformation = window.confirm("Are you sore !!");
     if (conformation) {
-      fetch(`http://localhost:8000/report/${id}`, {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.acknowledged) {
-            refetch();
-            return toast.success("Delete Success Full !!");
-          }
-        });
+            fetch(`http://localhost:8000/productsReport/${id}`, {
+                method: "DELETE",
+                headers: {
+                  "content-type": "application/json",
+                },
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.acknowledged) {
+                    refetch();
+                    return toast.success("Delete Success Full !!");
+                  }
+                });    
     }
   };
 
@@ -50,7 +52,7 @@ const ReportedItems = () => {
           <div className=" w-full">
             <div className="flex items-center justify-center ">
               <h2 className="text-center  text-3xl md:text-4xl  font-bold inline-block text-blue-900 my-4   border-b-2    pb-3 uppercase ">
-                All Buyers
+                All Reported_Items
               </h2>
             </div>
             <div className="mt-5 ">
@@ -76,13 +78,13 @@ const ReportedItems = () => {
                         <td><div className="avatar">
                             <div className="w-12 rounded">
                               <img
-                                src={product?.img}
+                                src={product?.image}
                                 alt="Tailwind-CSS-Avatar-component"
                               />
                             </div>
                           </div></td>
                         <td>{product.productName}</td>
-                        <td>{product.price}</td>
+                        <td>{product.resellPrice}</td>
                         <td>{product.email}</td>
                         
 
