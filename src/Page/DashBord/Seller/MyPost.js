@@ -16,7 +16,7 @@ const MyPost = () => {
     queryKey: ["email", "myProducts"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:8000/myProducts?email=${email}`
+        `https://12-sarver-rahul-sarker18.vercel.app/myProducts?email=${email}`
       );
       const data = await res.json();
       return data;
@@ -31,7 +31,7 @@ const MyPost = () => {
   const handelDelete = (id) => {
     const conformation = window.confirm("Are you sore !!");
     if (conformation) {
-      fetch(`http://localhost:8000/products/${id}`, {
+      fetch(`https://12-sarver-rahul-sarker18.vercel.app/products/${id}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",

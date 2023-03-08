@@ -21,16 +21,16 @@ const SignUp = () => {
     const email = data.email;
     const password = data.password;
     const type = data.type;
-     const items ={
+    const items = {
       name,
       email,
-      type
-     }
+      type,
+    };
     signup(email, password)
       .then((res) => {
         const user = res.user;
         if (user.uid) {
-          fetch("http://localhost:8000/user", {
+          fetch("https://12-sarver-rahul-sarker18.vercel.app/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -39,9 +39,9 @@ const SignUp = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              if(data?.acknowledged){
+              if (data?.acknowledged) {
                 navigate(from, { replace: true });
-                return toast.success('success sign up !!')
+                return toast.success("success sign up !!");
               }
             });
         }
@@ -54,16 +54,16 @@ const SignUp = () => {
   const googleHandel = () => {
     loginGoogle()
       .then((res) => {
-        const user = res.user
-      
-        const {email , displayName} = user;
-        const items ={
-          name :displayName,
+        const user = res.user;
+
+        const { email, displayName } = user;
+        const items = {
+          name: displayName,
           email,
-          type :"Buyer"
-         }
+          type: "Buyer",
+        };
         if (user.uid) {
-          fetch("http://localhost:8000/user", {
+          fetch("https://12-sarver-rahul-sarker18.vercel.app/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -72,9 +72,9 @@ const SignUp = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              if(data?.acknowledged){
+              if (data?.acknowledged) {
                 navigate(from, { replace: true });
-                return toast.success('success sign up !!')
+                return toast.success("success sign up !!");
               }
             });
         }

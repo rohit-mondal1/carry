@@ -39,7 +39,7 @@ const Login = () => {
         type :"Buyer"
        }
       if (user.uid) {
-        fetch("http://localhost:8000/user", {
+        fetch("https://12-sarver-rahul-sarker18.vercel.app/user", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -48,9 +48,9 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            if(data?.acknowledged){
+            if (data?.acknowledged) {
               navigate(from, { replace: true });
-              return toast.success('success log in !!')
+              return toast.success("success log in !!");
             }
           });
       }

@@ -17,7 +17,9 @@ const AddProducta = () => {
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:8000/categories");
+      const res = await fetch(
+        "https://12-sarver-rahul-sarker18.vercel.app/categories"
+      );
       const data = await res.json();
       return data;
     },
@@ -59,7 +61,7 @@ const AddProducta = () => {
             yearsOfUse: data.yearsOfUse,
             description: data.description,
           };
-          fetch("http://localhost:8000/product", {
+          fetch("https://12-sarver-rahul-sarker18.vercel.app/product", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -70,7 +72,7 @@ const AddProducta = () => {
             .then((data) => {
               if (data.acknowledged) {
                 navigate("/");
-                return toast.success(' post success full !!')
+                return toast.success(" post success full !!");
               }
             });
         }

@@ -27,7 +27,9 @@ const MyBook = () => {
   } = useQuery({
     queryKey: ["email"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:8000/booking?email=${email}`);
+      const res = await fetch(
+        `https://12-sarver-rahul-sarker18.vercel.app/booking?email=${email}`
+      );
       const data = await res.json();
       return data;
     },
@@ -41,7 +43,7 @@ const MyBook = () => {
   const handelDelete = (id) => {
     const conformation = window.confirm("Are you sore !!");
     if (conformation) {
-      fetch(`http://localhost:8000/Order/${id}`, {
+      fetch(`https://12-sarver-rahul-sarker18.vercel.app/Order/${id}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",

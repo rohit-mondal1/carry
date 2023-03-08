@@ -4,7 +4,7 @@ import CatogoriCart from './CatogoriCart';
 const ProductsCategories = () => {
     const [products , setProducts] = useState([])
     useEffect(()=>{
-        fetch("http://localhost:8000/categories")
+        fetch("https://12-sarver-rahul-sarker18.vercel.app/categories")
           .then((res) => res.json())
           .then((data) => setProducts(data));
     },[])

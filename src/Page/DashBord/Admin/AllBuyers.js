@@ -5,35 +5,37 @@ import {AiFillCloseCircle} from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 
 const AllBuyers = () => {
-    const {data=[] , refetch} = useQuery({
-        queryKey:['allBuyers'],
-        queryFn: async()=>{
-            const res = await fetch('http://localhost:8000/allBuyers')
-            const data = await res.json()
-            return data
-        }
-    })
+    const { data = [], refetch } = useQuery({
+      queryKey: ["allBuyers"],
+      queryFn: async () => {
+        const res = await fetch(
+          "https://12-sarver-rahul-sarker18.vercel.app/allBuyers"
+        );
+        const data = await res.json();
+        return data;
+      },
+    });
 
     console.log(data);
 
-    const handelDelete=(id)=>{
-        const conformation = window.confirm("Are you sore !!");
-        if (conformation) {
-          fetch(`http://localhost:8000/users/${id}`, {
-            method: "DELETE",
-            headers: {
-              "content-type": "application/json",
-            },
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.acknowledged) {
-                refetch();
-                return toast.success("Delete Success Full !!");
-              }
-            });
-        }
-    }
+    const handelDelete = (id) => {
+      const conformation = window.confirm("Are you sore !!");
+      if (conformation) {
+        fetch(`https://12-sarver-rahul-sarker18.vercel.app/users/${id}`, {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              refetch();
+              return toast.success("Delete Success Full !!");
+            }
+          });
+      }
+    };
     return (
         <div>
             <div>

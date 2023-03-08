@@ -13,7 +13,9 @@ const Home = () => {
   const { data = [] } = useQuery({
     queryKey: ["email"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:8000/users?gmail=${email}`);
+      const res = await fetch(
+        `https://12-sarver-rahul-sarker18.vercel.app/users?gmail=${email}`
+      );
       const data = await res.json();
       return data;
     },

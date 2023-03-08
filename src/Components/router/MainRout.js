@@ -39,7 +39,10 @@ export const router = createBrowserRouter([
       {
         path: "Products/:name",
         element: <Products />,
-        loader: async({params})=>fetch(`http://localhost:8000/Products/${params.name}`)
+        loader: async ({ params }) =>
+          fetch(
+            `https://12-sarver-rahul-sarker18.vercel.app/Products/${params.name}`
+          ),
       },
       {
         path: "/blog",
@@ -61,7 +64,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/DashBord",
-        element:<PrivateRout><Profile /></PrivateRout> ,
+        element: (
+          <PrivateRout>
+            <Profile />
+          </PrivateRout>
+        ),
       },
       {
         path: "/DashBord/me",
@@ -69,30 +76,66 @@ export const router = createBrowserRouter([
       },
       {
         path: "/DashBord/my_book",
-        element: <PrivateRout><BuyerRouter><MyBook/></BuyerRouter></PrivateRout>  ,
+        element: (
+          <PrivateRout>
+            <BuyerRouter>
+              <MyBook />
+            </BuyerRouter>
+          </PrivateRout>
+        ),
       },
       // seller
       {
         path: "/DashBord/add_Products",
-        element: <PrivateRout><SellerRout><AddProducta/></SellerRout></PrivateRout>  ,
+        element: (
+          <PrivateRout>
+            <SellerRout>
+              <AddProducta />
+            </SellerRout>
+          </PrivateRout>
+        ),
       },
       {
         path: "/DashBord/my_Post",
-        element:<PrivateRout><SellerRout><MyPost/></SellerRout></PrivateRout>  ,
+        element: (
+          <PrivateRout>
+            <SellerRout>
+              <MyPost />
+            </SellerRout>
+          </PrivateRout>
+        ),
       },
       // admin
       {
         path: "/DashBord/All_Buyers",
-        element: <PrivateRout><AdminRouter><AllBuyers /></AdminRouter></PrivateRout> ,
+        element: (
+          <PrivateRout>
+            <AdminRouter>
+              <AllBuyers />
+            </AdminRouter>
+          </PrivateRout>
+        ),
       },
       {
         path: "/DashBord/All_Seller",
-        element: <PrivateRout><AdminRouter><AllSellers /></AdminRouter></PrivateRout>  ,
+        element: (
+          <PrivateRout>
+            <AdminRouter>
+              <AllSellers />
+            </AdminRouter>
+          </PrivateRout>
+        ),
       },
 
       {
         path: "/DashBord/Reported_Items",
-        element:<PrivateRout><AdminRouter><ReportedItems /></AdminRouter></PrivateRout>  ,
+        element: (
+          <PrivateRout>
+            <AdminRouter>
+              <ReportedItems />
+            </AdminRouter>
+          </PrivateRout>
+        ),
       },
     ],
   },

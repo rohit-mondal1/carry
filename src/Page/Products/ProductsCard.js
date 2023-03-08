@@ -31,7 +31,7 @@ const ProductsCard = ({ PRODUCT }) => {
     setProductData(product);
   };
 
-  const handelSubmite = (e) => { 
+  const handelSubmite = (e) => {
     e.preventDefault();
     const phone = e.target.username.value;
     const location = e.target.location.value;
@@ -42,11 +42,10 @@ const ProductsCard = ({ PRODUCT }) => {
       img: productData?.image,
       id: productData?._id,
       price: productData?.resellPrice,
-      productName:productData?.productName
+      productName: productData?.productName,
     };
 
-
-    fetch("http://localhost:8000/booking", {
+    fetch("https://12-sarver-rahul-sarker18.vercel.app/booking", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -56,18 +55,18 @@ const ProductsCard = ({ PRODUCT }) => {
       .then((res) => res.json())
       .then((datas) => {
         if (datas.acknowledged) {
-          e.target.reset()
-          setProductData(null)
-          return toast.success(' Book success full !!')
+          e.target.reset();
+          setProductData(null);
+          return toast.success(" Book success full !!");
         }
       });
   };
 
-  const handelRepo =(productData)=>{
-    setProductTow(productData)
-  }
-  
-  const handelsub= e =>{
+  const handelRepo = (productData) => {
+    setProductTow(productData);
+  };
+
+  const handelsub = (e) => {
     e.preventDefault();
     // const data = {
     //   email: user?.email,
@@ -76,13 +75,16 @@ const ProductsCard = ({ PRODUCT }) => {
     //   price: productTow?.resellPrice,
     //   productName:productTow?.productName
     // };
-    console.log("object" ,productTow?._id );
-    fetch(`http://localhost:8000/postreop?id=${productTow?._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
+    console.log("object", productTow?._id);
+    fetch(
+      `https://12-sarver-rahul-sarker18.vercel.app/postreop?id=${productTow?._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
@@ -91,9 +93,8 @@ const ProductsCard = ({ PRODUCT }) => {
           return toast.success("report Success Full !!");
         }
       });
-        // 
-      
-  }
+    //
+  };
   
 
 

@@ -5,19 +5,21 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const AllSellers = () => {
-  const { data = [] , refetch} = useQuery({
+  const { data = [], refetch } = useQuery({
     queryKey: ["allSeller"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:8000/allSeller");
+      const res = await fetch(
+        "https://12-sarver-rahul-sarker18.vercel.app/allSeller"
+      );
       const data = await res.json();
       return data;
     },
   });
 
-  const handelDelete=(id)=>{
+  const handelDelete = (id) => {
     const conformation = window.confirm("Are you sore !!");
     if (conformation) {
-      fetch(`http://localhost:8000/users/${id}`, {
+      fetch(`https://12-sarver-rahul-sarker18.vercel.app/users/${id}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
@@ -31,35 +33,38 @@ const AllSellers = () => {
           }
         });
     }
-}
+  };
 
-const hadelVerify = (id, email) => {
-  fetch(`http://localhost:8000/update/${id}`, {
-    method: "PUT",
-    headers: {
-      "content-type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.acknowledged) {
-        refetch();
-        fetch(`http://localhost:8000/userupdat?email=${email}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.acknowledged) {
-              // refetch();
-              return toast.success("verify Success Full !!");
+  const hadelVerify = (id, email) => {
+    fetch(`https://12-sarver-rahul-sarker18.vercel.app/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          refetch();
+          fetch(
+            `https://12-sarver-rahul-sarker18.vercel.app/userupdat?email=${email}`,
+            {
+              method: "PUT",
+              headers: {
+                "content-type": "application/json",
+              },
             }
-          });
-      }
-    });
-};
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                // refetch();
+                return toast.success("verify Success Full !!");
+              }
+            });
+        }
+      });
+  };
 return (
   <div>
     <div>
