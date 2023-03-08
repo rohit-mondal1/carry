@@ -61,7 +61,7 @@ const MyBook = () => {
 
   const handelPay = (product) => {
     setModal(product);
-    console.log("product", product);
+  
   };
 
   return (

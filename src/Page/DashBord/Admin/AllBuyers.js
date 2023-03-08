@@ -16,7 +16,7 @@ const AllBuyers = () => {
       },
     });
 
-    console.log(data);
+  
 
     const handelDelete = (id) => {
       const conformation = window.confirm("Are you sore !!");

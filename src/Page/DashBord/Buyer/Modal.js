@@ -59,7 +59,7 @@ const Modal = ({ modal, htmlFor,refetch, setModal }) => {
     if (errors) {
       setErrord(error?.message);
     }
-    console.log("paymentIntent", paymentIntent);
+    
 
     if (paymentIntent?.status) {
       fetch(`https://12-sarver-rahul-sarker18.vercel.app/booking/${_id}`, {

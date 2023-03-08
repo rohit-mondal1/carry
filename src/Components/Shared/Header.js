@@ -8,7 +8,7 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
 
   const handelclick = () => {
-    console.log('object');
+    
     logOut();
     return toast.success('success full')
   };

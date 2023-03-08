@@ -68,14 +68,7 @@ const ProductsCard = ({ PRODUCT }) => {
 
   const handelsub = (e) => {
     e.preventDefault();
-    // const data = {
-    //   email: user?.email,
-    //   img: productTow?.image,
-    //   id: productTow?._id,
-    //   price: productTow?.resellPrice,
-    //   productName:productTow?.productName
-    // };
-    console.log("object", productTow?._id);
+    
     fetch(
       `https://12-sarver-rahul-sarker18.vercel.app/postreop?id=${productTow?._id}`,
       {
