@@ -7,9 +7,11 @@ import { toast } from "react-hot-toast";
 const ProductsCard = ({ PRODUCT }) => {
   const { user } = useContext(AuthContext);
   const [productData, setProductData] = useState(null);
-
+  const [productTow, setProductTow] = useState(null);
+  
   const {
     condition,
+    
     email,
     image,
     location,
@@ -61,6 +63,36 @@ const ProductsCard = ({ PRODUCT }) => {
         }
       });
   };
+
+  const handelRepo =(productData)=>{
+    setProductTow(productData)
+  }
+  
+  const handelsub= e =>{
+    e.preventDefault();
+    const data = {
+      email: user?.email,
+      img: productTow?.image,
+      id: productTow?._id,
+      price: productTow?.resellPrice,
+      productName:productTow?.productName
+    };
+    fetch("http://localhost:8000/reportadedItems", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((datas) => {
+        if (datas.acknowledged) {
+          
+          productTow(null)
+          return toast.success(' Book success full !!')
+        }
+      });
+  }
   
 
 
@@ -77,11 +109,18 @@ const ProductsCard = ({ PRODUCT }) => {
               <div className="flex justify-between items-center mt-3">
                 <h3 className="text-2xl">{productName}</h3>
                 <div className="flex items-center justify-center gap-3  text-base">
+                  <label  htmlFor="my-modal-4">
+
+                  <h1 className="flex items-center gap-2" onClick={()=>handelRepo(PRODUCT)}>
                   <BsFlagFill
                     
                     className={`cursor-pointer text-xl`}
-                  ></BsFlagFill>
-                  <p>  report</p>
+                    ></BsFlagFill>
+                  <span>Report</span>
+                  </h1>
+                    </label>
+                  
+                  
                 </div>
               </div>
 
@@ -146,7 +185,7 @@ const ProductsCard = ({ PRODUCT }) => {
             ✕
           </label>
           <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-900 text-gray-100">
-            <h1 className="text-2xl font-bold text-center">Login</h1>
+            <h1 className="text-2xl font-bold text-center">Book-ing</h1>
             <form
               onSubmit={handelSubmite}
               className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -185,6 +224,47 @@ const ProductsCard = ({ PRODUCT }) => {
         </div>
       </div>
      </div> }
+
+
+     <div>
+      {productTow && <div> <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative">
+          <label
+            htmlFor="my-modal-4"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-900 text-gray-100">
+            <h1 className="text-2xl font-bold text-center">Report</h1>
+            <form
+              onSubmit={handelsub}
+              className="space-y-6 ng-untouched ng-pristine ng-valid"
+            >
+              <div className="space-y-1 text-sm">
+                <label htmlFor="username" className="block text-gray-400">
+                  message
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="message"
+                  className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-violet-400"
+                />
+              </div>
+              
+              <button className="block w-full p-3 btn text-center rounded-sm text-gray-100 bg-blue-600">
+                Book Now
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+     </div>}
+     </div>
       
     </div>
   );
