@@ -33,20 +33,32 @@ const AllSellers = () => {
     }
 }
 
-const hadelVerify = (id) => {
+const hadelVerify = (id, email) => {
   fetch(`http://localhost:8000/update/${id}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.acknowledged) {
-            refetch();
-            return toast.success("verify Success Full !!");
-          }
-        });
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.acknowledged) {
+        refetch();
+        fetch(`http://localhost:8000/userupdat?email=${email}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              // refetch();
+              return toast.success("verify Success Full !!");
+            }
+          });
+      }
+    });
 };
 return (
   <div>
@@ -90,13 +102,18 @@ return (
                       <td>{product.type}</td>
                       <td>{product._id}</td>
                       <td>
-                        {product?.verify === "verify" ? <h1 className="font-bold">verifyed</h1> :  <button
-                          onClick={()=>{hadelVerify(product._id)}}
-                          className="btn btn-success btn-xs"
-                        >
-                          verify
-                        </button>}
-                       
+                        {product?.verify === "verify" ? (
+                          <h1 className="font-bold">verifyed</h1>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              hadelVerify(product._id, product?.email);
+                            }}
+                            className="btn btn-success btn-xs"
+                          >
+                            verify
+                          </button>
+                        )}
                       </td>
 
                       <td>

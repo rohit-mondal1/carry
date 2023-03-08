@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 
 const ProductsCard = ({ PRODUCT }) => {
   const { user } = useContext(AuthContext);
-  const [productData, setProductData] = useState({});
+  const [productData, setProductData] = useState(null);
 
   const {
     condition,
@@ -17,32 +17,20 @@ const ProductsCard = ({ PRODUCT }) => {
     phone,
     postDate,
     postTime,
-    productName,
+    productName, 
     resellPrice,
     sellerName,
     yearsOfUse,
     description,
-    isVerified,
-    isReported,
+    verify,
+    
   } = PRODUCT;
 
   const handleReport = (product) => {
-    // fetch(
-    //    `https://productko-server.vercel.app/products/reported/${product._id}`,
-    //    {
-    //       method: "put",
-    //       headers: {
-    //          authorization: `bearer ${localStorage.getItem(
-    //             "productKoToken"
-    //          )}`,
-    //       },
-    //    }
-    // )
-
     setProductData(product);
   };
 
-  const handelSubmite = (e) => {
+  const handelSubmite = (e) => { 
     e.preventDefault();
     const phone = e.target.username.value;
     const location = e.target.location.value;
@@ -68,6 +56,7 @@ const ProductsCard = ({ PRODUCT }) => {
       .then((datas) => {
         if (datas.acknowledged) {
           e.target.reset()
+          setProductData(null)
           return toast.success(' Book success full !!')
         }
       });
@@ -89,12 +78,10 @@ const ProductsCard = ({ PRODUCT }) => {
                 <h3 className="text-2xl">{productName}</h3>
                 <div className="flex items-center justify-center gap-3  text-base">
                   <BsFlagFill
-                    onClick={() => handleReport(PRODUCT)}
-                    className={`cursor-pointer text-xl ${
-                      isReported && "text-red-500"
-                    }`}
+                    
+                    className={`cursor-pointer text-xl`}
                   ></BsFlagFill>
-                  <p>{isReported ? "reported" : "report"}</p>
+                  <p>  report</p>
                 </div>
               </div>
 
@@ -116,7 +103,7 @@ const ProductsCard = ({ PRODUCT }) => {
               <h1 className="text-2xl ">Seller Info</h1>
               <h3 className="text-base font-bold flex items-center justify-start gap-1">
                 Name: {sellerName}
-                {isVerified && (
+                {verify === "verify" && (
                   <MdVerified className="text-[20px] text-green-500 "></MdVerified>
                 )}
               </h3>
@@ -148,7 +135,7 @@ const ProductsCard = ({ PRODUCT }) => {
 
 
       {/* Put this part before </body> tag */}
-     
+     {productData && <div>
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
@@ -197,6 +184,8 @@ const ProductsCard = ({ PRODUCT }) => {
           </div>
         </div>
       </div>
+     </div> }
+      
     </div>
   );
 };
