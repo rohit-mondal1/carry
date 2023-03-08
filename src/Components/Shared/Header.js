@@ -20,7 +20,12 @@ const Header = () => {
       <div className="navbar-start">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
           {/* <img src="https://i.ibb.co/FmHgBT1/eteacher-removebg-preview.png"  className="bg-white w-12 rounded-full" alt="" /> */}
-          <h1>CARRY</h1>
+          <h1
+            className="text-3xl font-bold text-blue-700
+          "
+          >
+            CARRY
+          </h1>
         </Link>
       </div>
 
