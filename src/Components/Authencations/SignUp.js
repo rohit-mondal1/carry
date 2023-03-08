@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import {  Link, useNavigate } from "react-router-dom";
+import {  Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 
 const SignUp = () => {
-  const navigate = useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -38,7 +40,7 @@ const SignUp = () => {
             .then((res) => res.json())
             .then((data) => {
               if(data?.acknowledged){
-                navigate('/')
+                navigate(from, { replace: true });
                 return toast.success('success sign up !!')
               }
             });
@@ -71,7 +73,7 @@ const SignUp = () => {
             .then((res) => res.json())
             .then((data) => {
               if(data?.acknowledged){
-                navigate('/')
+                navigate(from, { replace: true });
                 return toast.success('success sign up !!')
               }
             });
@@ -174,7 +176,7 @@ const SignUp = () => {
         </div>
         <p className="text-xs text-center sm:px-6 text-gray-100">
           Don't have an account?
-          <Link to="/" className="underline text-gray-100">
+          <Link to="/LogIn" className="underline text-gray-100">
             Login..
           </Link>
         </p>

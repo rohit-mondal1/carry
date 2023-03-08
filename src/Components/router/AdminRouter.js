@@ -3,10 +3,10 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Context/UserContext';
 
 const AdminRouter = ({children}) => {
-    const {usersType , loder} = useContext(AuthContext);
+    const {usersType , loder, loding} = useContext(AuthContext);
     const location = useLocation();
 
-  if (loder) {
+  if ( loding) {
     return (
       <div className="flex flex-col mx-auto my-20 m-8 rounded shadow-md w-60 sm:w-80 animate-pulse h-96">
         <div className="h-48 rounded-t dark:bg-gray-700"></div>

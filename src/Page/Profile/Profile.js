@@ -1,9 +1,40 @@
-import React, { useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../Components/Context/UserContext";
 
 const Profile = () => {
- const {usersType}= useContext(AuthContext)
+
+ const {setUsersType ,usersType, user, setLoding} = useContext(AuthContext)
+  const email = user?.email;
+ 
+  const { data = [] , isLoading } = useQuery({
+    queryKey: ["users","email"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:8000/users?gmail=${email}`);
+      const data = await res.json();
+      return data;
+    },
+    
+  });
+  
+  useEffect(() => {
+    
+    for (const datas of data) {
+      setUsersType(datas);
+    }
+    setLoding(false)
+  }, [data , setLoding ,setUsersType]);
+  if(isLoading){
+    return <div className="flex flex-col mx-auto my-20 m-8 rounded shadow-md w-60 sm:w-80 animate-pulse h-96">
+    <div className="h-48 rounded-t dark:bg-gray-700"></div>
+    <div className="flex-1 px-4 py-8 space-y-4 sm:p-8 dark:bg-gray-900">
+      <div className="w-full h-6 rounded dark:bg-gray-700"></div>
+      <div className="w-full h-6 rounded dark:bg-gray-700"></div>
+      <div className="w-3/4 h-6 rounded dark:bg-gray-700"></div>
+    </div>
+  </div>
+  }
   return (
     <div>
       <div className="flex mx-auto my-20 flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100">

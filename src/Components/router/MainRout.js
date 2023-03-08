@@ -69,30 +69,30 @@ export const router = createBrowserRouter([
       },
       {
         path: "/DashBord/my_book",
-        element: <BuyerRouter><MyBook/></BuyerRouter> ,
+        element: <PrivateRout><BuyerRouter><MyBook/></BuyerRouter></PrivateRout>  ,
       },
       // seller
       {
         path: "/DashBord/add_Products",
-        element: <SellerRout><AddProducta/></SellerRout> ,
+        element: <PrivateRout><SellerRout><AddProducta/></SellerRout></PrivateRout>  ,
       },
       {
         path: "/DashBord/my_Post",
-        element:<SellerRout><MyPost/></SellerRout> ,
+        element:<PrivateRout><SellerRout><MyPost/></SellerRout></PrivateRout>  ,
       },
       // admin
       {
         path: "/DashBord/All_Buyers",
-        element: <AdminRouter><AllBuyers /></AdminRouter>,
+        element: <PrivateRout><AdminRouter><AllBuyers /></AdminRouter></PrivateRout> ,
       },
       {
         path: "/DashBord/All_Seller",
-        element: <AdminRouter><AllSellers /></AdminRouter> ,
+        element: <PrivateRout><AdminRouter><AllSellers /></AdminRouter></PrivateRout>  ,
       },
 
       {
         path: "/DashBord/Reported_Items",
-        element: <AdminRouter><ReportedItems /></AdminRouter> ,
+        element:<PrivateRout><AdminRouter><ReportedItems /></AdminRouter></PrivateRout>  ,
       },
     ],
   },

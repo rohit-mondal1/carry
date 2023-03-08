@@ -5,7 +5,7 @@ import { AuthContext } from "../Context/UserContext";
 
 const PrivateRout = ({ children }) => {
   const { user, loder } = useContext(AuthContext);
-  const location = new  useLocation();
+  const location = useLocation();
 
   if (loder) {
     return (

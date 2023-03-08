@@ -8,8 +8,9 @@ const provider = new GoogleAuthProvider();
 
 const UserContext = ({children}) => {
   const [user , setUser] = useState(null)
-  const [loder , setLoder] = useState(false)
-  const [usersType , setUsersType] = useState(false)
+  const [loder , setLoder] = useState(true)
+  const [loding , setLoding] = useState(true)
+  const [usersType , setUsersType] = useState(true)
 // sign up
   const signup=(email , password)=>{
     setLoder(true)
@@ -27,13 +28,14 @@ const UserContext = ({children}) => {
   }
 // login with google
 const loginGoogle=()=>{
+  setLoder(true)
   return signInWithPopup(auth , provider)
 }
   
   useEffect(()=>{
     const unsubscribe = onAuthStateChanged(auth , creatures =>{
-      setUser(creatures)
       setLoder(false)
+      setUser(creatures)
     })
     return ()=>{
       unsubscribe()
@@ -41,7 +43,7 @@ const loginGoogle=()=>{
   },[])
   
   
-  const authInfo = {user,loder,setUsersType , usersType,signup, logOut ,logIn,loginGoogle}
+  const authInfo = {user,loder,loding,setLoding,setUsersType , usersType,signup, logOut ,logIn,loginGoogle}
   return (
     <div>
       <AuthContext.Provider value={authInfo}>

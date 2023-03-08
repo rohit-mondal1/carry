@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 
 const Login = () => {
   const { logIn, loginGoogle } = useContext(AuthContext);
+  
+  const location = useLocation();
   const navigate = useNavigate();
-
+  const from = location.state?.from?.pathname || "/";
   const handleAddProduct = (e) => {
     e.preventDefault();
 
@@ -19,7 +21,7 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         if (user?.uid) {
-          navigate("/");
+          navigate(from, { replace: true });
           return toast.success("login success full !!");
         }
       })
@@ -47,7 +49,7 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             if(data?.acknowledged){
-              navigate('/')
+              navigate(from, { replace: true });
               return toast.success('success log in !!')
             }
           });
@@ -111,7 +113,7 @@ const Login = () => {
         </div>
         <p className="text-xs text-center sm:px-6 text-gray-400">
           Don't have an account?
-          <Link to="/" className="underline text-gray-100">
+          <Link to="/Register" className="underline text-gray-100">
             Sign up
           </Link>
         </p>

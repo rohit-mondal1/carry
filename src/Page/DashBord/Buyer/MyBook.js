@@ -1,4 +1,4 @@
-import { CardElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
+import {Elements} from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
@@ -63,7 +63,7 @@ const MyBook = () => {
   };
 
 
-  // mayment
+
 
 
   return (
@@ -119,17 +119,22 @@ const MyBook = () => {
                         <td>{product.location}</td>
                         <td>{product.price} RS</td>
                         <td>
-                          <label htmlFor={htmlFor}>
-
-                          <button
-                            onClick={() => {
-                              handelPay(product);
-                            }}
-                            className="btn btn-sm btn-success"
-                          >
-                            pay
-                          </button>
-                          </label>
+                          {product.payment === "paid" ? (
+                            <button className=" bg-black text-white  p-3 rounded-xl">
+                              okay
+                            </button>
+                          ) : (
+                            <label htmlFor={htmlFor}>
+                              <button
+                                onClick={() => {
+                                  handelPay(product);
+                                }}
+                                className="btn btn-sm btn-success"
+                              >
+                                pay
+                              </button>
+                            </label>
+                          )}
                         </td>
 
                         <td>
@@ -154,9 +159,14 @@ const MyBook = () => {
 
       {modal && (
         <Elements stripe={stripePromise}>
-          <Modal htmlFor={htmlFor} modal={modal} setModal ={setModal} refetch ={refetch}></Modal>
+          <Modal
+            htmlFor={htmlFor}
+            modal={modal}
+            setModal={setModal}
+            refetch={refetch}
+          ></Modal>
         </Elements>
-       )} 
+      )}
     </div>
   );
 };
