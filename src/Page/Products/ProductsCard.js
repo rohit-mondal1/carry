@@ -3,6 +3,7 @@ import { MdVerified } from "react-icons/md";
 import { BsFlagFill } from "react-icons/bs";
 import { AuthContext } from "../../Components/Context/UserContext";
 import { toast } from "react-hot-toast";
+import PrivateRout from "../../Components/router/PrivateRout";
 
 const ProductsCard = ({ PRODUCT }) => {
   const { user } = useContext(AuthContext);
@@ -153,6 +154,8 @@ const ProductsCard = ({ PRODUCT }) => {
           </div>
           <div>
             {/* <button>Book Now</button> */}
+            <PrivateRout>
+
             <label
               htmlFor="my-modal-3"
               onClick={() => {
@@ -162,6 +165,7 @@ const ProductsCard = ({ PRODUCT }) => {
             >
               Book Now
             </label>
+            </PrivateRout>
           </div>
         </div>
         <div></div>
